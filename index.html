@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Encuesta de Satisfacción — Comensales</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1>🍽️ ¿Cómo estuvo tu visita?</h1>
+      <nav class="tabs" role="tablist" aria-label="Secciones">
+        <button class="tab active" id="tab-survey" role="tab" aria-selected="true" aria-controls="view-survey">Encuesta</button>
+        <button class="tab" id="tab-dashboard" role="tab" aria-selected="false" aria-controls="view-dashboard">Resultados</button>
+      </nav>
+    </header>
+
+    <!-- SURVEY VIEW -->
+    <main id="view-survey" class="view active" role="tabpanel" aria-labelledby="tab-survey">
+      <form id="survey-form" class="card" novalidate>
+        <div class="field">
+          <label for="comedor">Comedor / ubicación</label>
+          <input type="text" id="comedor" name="comedor" list="comedor-options" placeholder="Ej. Comedor Centro" maxlength="60" required />
+          <datalist id="comedor-options"></datalist>
+        </div>
+
+        <div class="field">
+          <label for="mesa">Mesa o número de pedido <span class="optional">(opcional)</span></label>
+          <input type="text" id="mesa" name="mesa" placeholder="Ej. Mesa 7" maxlength="40" />
+        </div>
+
+        <fieldset class="rating-group" data-key="comida">
+          <legend>Comida</legend>
+          <div class="stars" data-category="comida"></div>
+        </fieldset>
+
+        <fieldset class="rating-group" data-key="servicio">
+          <legend>Servicio</legend>
+          <div class="stars" data-category="servicio"></div>
+        </fieldset>
+
+        <fieldset class="rating-group" data-key="ambiente">
+          <legend>Ambiente</legend>
+          <div class="stars" data-category="ambiente"></div>
+        </fieldset>
+
+        <fieldset class="rating-group" data-key="limpieza">
+          <legend>Limpieza</legend>
+          <div class="stars" data-category="limpieza"></div>
+        </fieldset>
+
+        <div class="field">
+          <label for="comentario">Comentarios <span class="optional">(opcional)</span></label>
+          <textarea id="comentario" name="comentario" rows="3" maxlength="500" placeholder="Cuéntanos más..."></textarea>
+        </div>
+
+        <p id="form-error" class="form-error" hidden>Por favor califica las cuatro categorías antes de enviar.</p>
+
+        <button type="submit" class="btn-primary">Enviar encuesta</button>
+      </form>
+
+      <div id="thanks" class="card thanks" hidden>
+        <p class="thanks-emoji">🎉</p>
+        <h2>¡Gracias por tu opinión!</h2>
+        <p>Tu respuesta ayuda a mejorar la experiencia para todos.</p>
+        <button id="btn-again" class="btn-secondary">Enviar otra respuesta</button>
+      </div>
+    </main>
+
+    <!-- DASHBOARD VIEW -->
+    <main id="view-dashboard" class="view" role="tabpanel" aria-labelledby="tab-dashboard" hidden>
+      <div class="field filter-field">
+        <label for="filter-comedor">Comedor</label>
+        <select id="filter-comedor">
+          <option value="">Todos los comedores</option>
+        </select>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-tile">
+          <span class="stat-value" id="stat-total">0</span>
+          <span class="stat-label">Respuestas totales</span>
+        </div>
+        <div class="stat-tile">
+          <span class="stat-value" id="stat-avg">–</span>
+          <span class="stat-label">Promedio general</span>
+        </div>
+        <div class="stat-tile">
+          <span class="stat-value" id="stat-satisfied">–</span>
+          <span class="stat-label">% satisfechos (≥4★)</span>
+        </div>
+      </div>
+
+      <section class="card">
+        <h2>Promedio por categoría</h2>
+        <div id="chart-categories" class="bar-chart" role="img" aria-label="Promedio de calificación por categoría"></div>
+      </section>
+
+      <section class="card">
+        <h2>Distribución de calificaciones</h2>
+        <div id="chart-distribution" class="bar-chart" role="img" aria-label="Distribución de calificaciones generales"></div>
+      </section>
+
+      <section class="card">
+        <div class="comments-header">
+          <h2>Comentarios recientes</h2>
+        </div>
+        <ul id="comments-list" class="comments-list"></ul>
+        <p id="comments-empty" class="empty-state" hidden>Todavía no hay comentarios.</p>
+      </section>
+
+      <section class="card qr-card">
+        <h2>Comparte la encuesta</h2>
+        <img class="qr-image" src="qr-code.png" alt="Código QR hacia la encuesta" width="200" height="200" />
+        <p class="qr-url">https://bcdavidvalencia.github.io/encuesta-comensales/</p>
+        <p class="qr-hint">Imprime este código y colócalo en las mesas de cada comedor.</p>
+      </section>
+
+      <div class="dashboard-actions">
+        <button id="btn-export" class="btn-secondary">Exportar CSV</button>
+        <button id="btn-reset" class="btn-danger">Borrar todos los datos</button>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
