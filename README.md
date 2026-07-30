@@ -39,7 +39,8 @@ powershell -File serve.ps1
 1. Sube este contenido a un repositorio de GitHub.
 2. En el repositorio: **Settings → Pages → Source: Deploy from a branch**,
    selecciona la rama `main` y la carpeta `/ (root)`.
-3. La app queda publicada en `https://<usuario>.github.io/<repositorio>/`.
+3. La app queda publicada en `https://<usuario>.github.io/<repositorio>/`
+   — en este repo: `https://bcdavidvalencia-sudo.github.io/-encuesta-comensales/`.
 
 ## Código QR
 
